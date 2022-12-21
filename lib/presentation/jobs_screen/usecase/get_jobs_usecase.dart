@@ -1,4 +1,3 @@
-import 'package:job_search/domain/models/job.dart';
 import 'package:job_search/domain/models/jobs_response.dart';
 import 'package:job_search/domain/repository/jobs_repository.dart';
 import 'package:job_search/domain/usecase/usecase.dart';

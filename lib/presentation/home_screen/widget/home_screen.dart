@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:job_search/presentation/companies_screen/widget/companies_screen.dart';
 import 'package:job_search/presentation/jobs_screen/widget/jobs_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,7 +13,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
   static final List<Widget> _widgetOptions = <Widget>[
     const JobsScreen(),
-    Container(color: Colors.yellow,),
+    const CompaniesScreen(),
     Container(color: Colors.green,),
   ];
 

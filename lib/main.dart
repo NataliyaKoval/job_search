@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:job_search/di/providers.dart';
 import 'package:job_search/presentation/home_screen/widget/home_screen.dart';
-import 'package:job_search/presentation/jobs_screen/widget/jobs_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {

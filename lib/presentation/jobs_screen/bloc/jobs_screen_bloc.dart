@@ -24,7 +24,6 @@ class JobsScreenBloc extends Bloc<JobsScreenEvent, JobsScreenState> {
       emit(JobsScreenLoaded(allJobsList));
     } catch (e) {
       emit(JobsScreenError());
-      print('error: $e');
     }
   }
 }

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:job_search/data/entity/companies_response_entity.dart';
+import 'package:job_search/data/entity/company_jobs_response_entity.dart';
 import 'package:job_search/data/entity/jobs_response_entity.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -15,4 +16,8 @@ abstract class ApiClient {
 
   @GET('/companies')
   Future<CompaniesResponseEntity> getCompanies();
+
+  @GET('/companies/{company_id}/jobs/')
+  Future<CompanyJobsResponseEntity> getCompanyJobs(
+      @Path("company_id") String id);
 }

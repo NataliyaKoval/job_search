@@ -12,15 +12,14 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
   static final List<Widget> _widgetOptions = <Widget>[
-    const JobsScreen(),
-    const CompaniesScreen(),
+    const JobsScreen(title: 'Jobs',),
+    const CompaniesScreen(title: 'Companies',),
     Container(color: Colors.green,),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         unselectedItemColor: const Color(0xFF959B9D),

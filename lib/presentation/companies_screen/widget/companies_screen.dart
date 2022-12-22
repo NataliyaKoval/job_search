@@ -6,7 +6,12 @@ import 'package:job_search/presentation/companies_screen/usecase/get_companies_u
 import 'package:job_search/presentation/companies_screen/widget/companies_list.dart';
 
 class CompaniesScreen extends StatelessWidget {
-  const CompaniesScreen({Key? key}) : super(key: key);
+  const CompaniesScreen({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
+
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -16,15 +21,20 @@ class CompaniesScreen extends StatelessWidget {
           repository: context.read<CompaniesRepository>(),
         ),
       )..getAllCompanies(),
-      child: BlocBuilder<CompaniesScreenCubit, CompaniesScreenState>(
-          builder: (BuildContext context, CompaniesScreenState state) {
-        if (state is CompaniesScreenLoaded) {
-          return CompaniesList(companies: state.companiesList,);
-        } else if (state is CompaniesScreenError) {
-          return const Text('CompaniesScreenError');
-        }
-        return const CircularProgressIndicator();
-      }),
+      child: Scaffold(
+        appBar: AppBar(title: Text(title),),
+        body: BlocBuilder<CompaniesScreenCubit, CompaniesScreenState>(
+            builder: (BuildContext context, CompaniesScreenState state) {
+          if (state is CompaniesScreenLoaded) {
+            return CompaniesList(
+              companies: state.companiesList,
+            );
+          } else if (state is CompaniesScreenError) {
+            return const Text('CompaniesScreenError');
+          }
+          return const CircularProgressIndicator();
+        }),
+      ),
     );
   }
 }

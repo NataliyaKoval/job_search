@@ -17,7 +17,8 @@ class JobCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute<void>(
-              builder: (BuildContext context) => SingleJobScreen(job: job)),
+            builder: (BuildContext context) => SingleJobScreen(job: job),
+          ),
         );
       },
       child: Card(
@@ -36,7 +37,9 @@ class JobCard extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              const SizedBox(height: 8,),
+              const SizedBox(
+                height: 8,
+              ),
               Text(job.city),
             ],
           ),

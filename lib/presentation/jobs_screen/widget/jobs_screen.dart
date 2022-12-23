@@ -22,7 +22,7 @@ class JobsScreen extends StatelessWidget {
           repository: context.read<JobsRepository>(),
         ),
         filterJobsUsecase: FilterJobsUsecase(),
-      )..add(GetAllJobs()),
+      )..add(GetAllJobsEvent()),
       child: Scaffold(
         appBar: AppBar(
           title: Text(title),
@@ -32,10 +32,23 @@ class JobsScreen extends StatelessWidget {
             if (state is JobsScreenLoaded) {
               return Column(
                 children: [
-                  TextField(
-
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      decoration: const InputDecoration(
+                        icon: Icon(Icons.search),
+                      ),
+                      onChanged: (val) {
+                        context
+                            .read<JobsScreenBloc>()
+                            .add(FilterJobsEvent(filter: val));
+                      },
+                    ),
                   ),
-                  JobsList(jobs: state.jobsList),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Expanded(child: JobsList(jobs: state.jobsList)),
                 ],
               );
             } else if (state is JobsScreenError) {

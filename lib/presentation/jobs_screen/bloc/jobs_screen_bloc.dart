@@ -15,8 +15,8 @@ class JobsScreenBloc extends Bloc<JobsScreenEvent, JobsScreenState> {
   JobsScreenBloc(
       {required this.filterJobsUsecase, required this.getJobsUsecase})
       : super(JobsScreenInitial()) {
-    on<GetAllJobs>(_getAllJobs);
-    on<FilterJobs>(_filterJobs);
+    on<GetAllJobsEvent>(_getAllJobs);
+    on<FilterJobsEvent>(_filterJobs);
   }
 
   final GetJobsUsecase getJobsUsecase;
@@ -25,18 +25,18 @@ class JobsScreenBloc extends Bloc<JobsScreenEvent, JobsScreenState> {
   List<Job> allJobsList = [];
 
   Future<void> _getAllJobs(
-      GetAllJobs event, Emitter<JobsScreenState> emit) async {
+      GetAllJobsEvent event, Emitter<JobsScreenState> emit) async {
     try {
       emit(JobsScreenLoading());
       final JobsResponse response = await getJobsUsecase.call();
-      final List<Job> allJobsList = response.result;
+      allJobsList = response.result;
       emit(JobsScreenLoaded(allJobsList));
     } catch (e) {
       emit(JobsScreenError());
     }
   }
 
-  void _filterJobs(FilterJobs event, Emitter<JobsScreenState> emit) async {
+  void _filterJobs(FilterJobsEvent event, Emitter<JobsScreenState> emit) async {
     final filteredJobs = await filterJobsUsecase
         .call(FilterParams(allJobs: allJobsList, filter: event.filter));
     emit(JobsScreenLoaded(filteredJobs));

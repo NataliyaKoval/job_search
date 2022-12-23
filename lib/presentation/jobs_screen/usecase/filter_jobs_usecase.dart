@@ -5,7 +5,8 @@ class FilterJobsUsecase extends UseCase<List<Job>, FilterParams> {
   @override
   Future<List<Job>> call(params) async {
     return params.allJobs
-        .where((element) => element.city.contains(params.filter))
+        .where((element) =>
+            element.title.toLowerCase().contains(params.filter.toLowerCase()))
         .toList();
   }
 }

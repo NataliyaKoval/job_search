@@ -11,7 +11,6 @@ class JobsScreenLoaded extends JobsScreenState {
   JobsScreenLoaded(this.jobsList);
 
   final List<Job> jobsList;
-
 }
 
 class JobsScreenError extends JobsScreenState {}

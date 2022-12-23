@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:job_search/domain/models/job.dart';
-import 'package:job_search/domain/models/jobs_response.dart';
 import 'package:job_search/presentation/jobs_screen/usecase/filter_jobs_usecase.dart';
 import 'package:job_search/presentation/jobs_screen/usecase/get_jobs_usecase.dart';
 
@@ -28,8 +27,7 @@ class JobsScreenBloc extends Bloc<JobsScreenEvent, JobsScreenState> {
       GetAllJobsEvent event, Emitter<JobsScreenState> emit) async {
     try {
       emit(JobsScreenLoading());
-      final JobsResponse response = await getJobsUsecase.call();
-      allJobsList = response.result;
+      allJobsList = await getJobsUsecase.call();
       emit(JobsScreenLoaded(allJobsList));
     } catch (e) {
       emit(JobsScreenError());
@@ -37,7 +35,8 @@ class JobsScreenBloc extends Bloc<JobsScreenEvent, JobsScreenState> {
   }
 
   void _filterJobs(FilterJobsEvent event, Emitter<JobsScreenState> emit) async {
-    final filteredJobs = await filterJobsUsecase
+
+    final List<Job> filteredJobs = await filterJobsUsecase
         .call(FilterParams(allJobs: allJobsList, filter: event.filter));
     emit(JobsScreenLoaded(filteredJobs));
   }

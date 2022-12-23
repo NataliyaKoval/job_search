@@ -1,5 +1,5 @@
-import 'package:job_search/domain/models/company_jobs_response.dart';
+import 'package:job_search/domain/models/job.dart';
 
 abstract class CompanyJobsRepository {
-  Future<CompanyJobsResponse> getCompanyJobs(String id);
+  Future<List<Job>> getCompanyJobs(String id);
 }

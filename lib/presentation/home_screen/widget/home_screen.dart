@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:job_search/presentation/add_company_screen/widget/add_company_screen.dart';
 import 'package:job_search/presentation/companies_screen/widget/companies_screen.dart';
 import 'package:job_search/presentation/jobs_screen/widget/jobs_screen.dart';
 
@@ -14,7 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
   static final List<Widget> _widgetOptions = <Widget>[
     const JobsScreen(title: 'Jobs',),
     const CompaniesScreen(title: 'Companies',),
-    Container(color: Colors.green,),
+    const AddCompanyScreen(),
   ];
 
   @override

@@ -12,7 +12,6 @@ class JobsResponseEntity {
 
   Map<String, dynamic> toJson() => _$JobsResponseEntityToJson(this);
 
-  @override
   @JsonKey(name: 'result')
   final List<JobEntity> result;
 }

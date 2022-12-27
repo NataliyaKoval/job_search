@@ -1,8 +1,8 @@
-import 'package:job_search/domain/models/jobs_response.dart';
+import 'package:job_search/domain/models/job.dart';
 import 'package:job_search/domain/repository/jobs_repository.dart';
 import 'package:job_search/domain/usecase/usecase.dart';
 
-class GetJobsUsecase extends NoParamsUseCase<JobsResponse> {
+class GetJobsUsecase extends NoParamsUseCase<List<Job>> {
   GetJobsUsecase({
     required this.repository,
   });
@@ -10,7 +10,7 @@ class GetJobsUsecase extends NoParamsUseCase<JobsResponse> {
   final JobsRepository repository;
 
   @override
-  Future<JobsResponse> call() {
+  Future<List<Job>> call() {
     return repository.getJobs();
   }
 }

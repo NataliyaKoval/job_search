@@ -1,5 +1,6 @@
 import 'package:job_search/data/datasources/api_client.dart';
-import 'package:job_search/domain/models/companies_response.dart';
+import 'package:job_search/data/entity/companies_response_entity.dart';
+import 'package:job_search/domain/models/company.dart';
 import 'package:job_search/domain/repository/companies_repository.dart';
 
 class CompaniesRepositoryImpl implements CompaniesRepository {
@@ -8,7 +9,8 @@ class CompaniesRepositoryImpl implements CompaniesRepository {
   final ApiClient apiClient;
 
   @override
-  Future<CompaniesResponse> getCompanies() {
-    return apiClient.getCompanies();
+  Future<List<Company>> getCompanies() async {
+    final CompaniesResponseEntity result = await apiClient.getCompanies();
+    return result.result;
   }
 }

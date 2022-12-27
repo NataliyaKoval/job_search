@@ -1,5 +1,6 @@
 import 'package:job_search/data/datasources/api_client.dart';
-import 'package:job_search/domain/models/jobs_response.dart';
+import 'package:job_search/data/entity/jobs_response_entity.dart';
+import 'package:job_search/domain/models/job.dart';
 import 'package:job_search/domain/repository/jobs_repository.dart';
 
 class JobsRepositoryImpl implements JobsRepository {
@@ -8,7 +9,8 @@ class JobsRepositoryImpl implements JobsRepository {
   JobsRepositoryImpl(this.apiClient);
 
   @override
-  Future<JobsResponse> getJobs() {
-    return apiClient.getJobs();
+  Future<List<Job>> getJobs() async {
+    final JobsResponseEntity result = await apiClient.getJobs();
+    return result.result;
   }
 }

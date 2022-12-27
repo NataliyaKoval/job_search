@@ -11,8 +11,9 @@ class CompaniesList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: ListView.builder(
+      child: ListView.separated(
         itemCount: companies.length,
+        separatorBuilder: (BuildContext context, int index) => const Divider(),
         itemBuilder: (context, index) =>
             CompanyCard(company: companies[index],),
       ),

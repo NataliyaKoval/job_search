@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:job_search/presentation/add_company_screen/widget/add_company_screen.dart';
+import 'package:job_search/presentation/add_job_screen/widget/add_job_screen.dart';
 import 'package:job_search/presentation/companies_screen/widget/companies_screen.dart';
 import 'package:job_search/presentation/jobs_screen/widget/jobs_screen.dart';
 
@@ -16,6 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
     const JobsScreen(title: 'Jobs',),
     const CompaniesScreen(title: 'Companies',),
     const AddCompanyScreen(),
+    const AddJobScreen(),
   ];
 
   @override
@@ -44,7 +46,13 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(
               Icons.post_add,
             ),
-            label: 'Add',
+            label: 'Add company',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.post_add,
+            ),
+            label: 'Add job',
           ),
         ],
       ),

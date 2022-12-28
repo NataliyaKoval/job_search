@@ -3,6 +3,8 @@ import 'package:job_search/data/entity/companies_response_entity.dart';
 import 'package:job_search/data/entity/company_jobs_response_entity.dart';
 import 'package:job_search/data/entity/company_request_body_entity.dart';
 import 'package:job_search/data/entity/create_company_response_entity.dart';
+import 'package:job_search/data/entity/create_job_response_entity.dart';
+import 'package:job_search/data/entity/job_request_body_entity.dart';
 import 'package:job_search/data/entity/jobs_response_entity.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -26,4 +28,9 @@ abstract class ApiClient {
   @POST('/companies')
   Future<CreateCompanyResponseEntity> createCompany(
       @Body() CompanyRequestBodyEntity company);
+
+  @POST('/jobs')
+  Future<CreateJobResponseEntity> createJob(
+      @Body() JobRequestBodyEntity job);
+
 }

@@ -16,8 +16,8 @@ class _HomeScreenState extends State<HomeScreen> {
   static final List<Widget> _widgetOptions = <Widget>[
     const JobsScreen(title: 'Jobs',),
     const CompaniesScreen(title: 'Companies',),
-    const AddCompanyScreen(),
-    const AddJobScreen(),
+    const AddCompanyScreen(title: 'Create company',),
+    const AddJobScreen(title: 'Create job',),
   ];
 
   @override
@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.post_add,
+              Icons.handshake,
             ),
             label: 'Add job',
           ),

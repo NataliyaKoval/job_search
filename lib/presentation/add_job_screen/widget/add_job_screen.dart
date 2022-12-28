@@ -7,7 +7,9 @@ import 'package:job_search/presentation/add_job_screen/usecase/create_job_usecas
 import 'package:job_search/presentation/companies_screen/usecase/get_companies_usecase.dart';
 
 class AddJobScreen extends StatefulWidget {
-  const AddJobScreen({Key? key}) : super(key: key);
+  const AddJobScreen({Key? key, required this.title}) : super(key: key);
+
+  final String title;
 
   @override
   State<AddJobScreen> createState() => _AddJobScreenState();
@@ -18,6 +20,7 @@ class _AddJobScreenState extends State<AddJobScreen> {
   final _jobDescriptionController = TextEditingController();
   final _jobCityController = TextEditingController();
   String dropdownValue = '1';
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -38,11 +41,15 @@ class _AddJobScreenState extends State<AddJobScreen> {
           repository: context.read<JobsRepository>(),
         ),
       )..getAllCompanies(),
-      child: Builder(
-        builder: (context) {
-          return Scaffold(
-            appBar: AppBar(),
-            body: Form(
+      child: Builder(builder: (context) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(widget.title),
+          ),
+          body: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Form(
+              key: _formKey,
               child: Column(
                 children: [
                   BlocBuilder<AddJobScreenCubit, AddJobScreenState>(
@@ -71,39 +78,59 @@ class _AddJobScreenState extends State<AddJobScreen> {
                   TextFormField(
                     controller: _jobTitleController,
                     decoration: const InputDecoration(labelText: 'Job title'),
-                    //TODO: validator
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter job title';
+                      }
+                      return null;
+                    },
                   ),
                   TextFormField(
                     controller: _jobDescriptionController,
-                    decoration: const InputDecoration(labelText: 'Job description'),
+                    decoration:
+                        const InputDecoration(labelText: 'Job description'),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter job description';
+                      }
+                      return null;
+                    },
                   ),
                   TextFormField(
                     controller: _jobCityController,
                     decoration: const InputDecoration(labelText: 'City'),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter city';
+                      }
+                      return null;
+                    },
                   ),
                   const SizedBox(
                     height: 10,
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      context.read<AddJobScreenCubit>().createJob(
-                            title: _jobTitleController.text,
-                            description: _jobDescriptionController.text,
-                            city: _jobCityController.text,
-                            companyId: int.parse(dropdownValue),
-                          );
-                      _jobTitleController.text = '';
-                      _jobDescriptionController.text = '';
-                      _jobCityController.text = '';
+                      if (_formKey.currentState!.validate()) {
+                        context.read<AddJobScreenCubit>().createJob(
+                              title: _jobTitleController.text,
+                              description: _jobDescriptionController.text,
+                              city: _jobCityController.text,
+                              companyId: int.parse(dropdownValue),
+                            );
+                        _jobTitleController.text = '';
+                        _jobDescriptionController.text = '';
+                        _jobCityController.text = '';
+                      }
                     },
                     child: const Text('Create'),
                   ),
                 ],
               ),
             ),
-          );
-        }
-      ),
+          ),
+        );
+      }),
     );
   }
 }

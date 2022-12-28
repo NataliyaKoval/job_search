@@ -22,32 +22,24 @@ class CompanyCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(12),
         color: const Color(0xF9EAE5AE),
-        child: Row(
+        child: Column(
           children: [
-            const Padding(
-              padding: EdgeInsets.only(right: 30),
-              child: FlutterLogo(),
+            Text(
+              company.name,
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.w600,
+              ),
             ),
-            Column(
-              children: [
-                Text(
-                  company.name,
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                Text(company.industry,
-                    style: const TextStyle(
-                      color: Colors.blueGrey,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    )),
-              ],
+            const SizedBox(
+              height: 8,
             ),
+            Text(company.industry,
+                style: const TextStyle(
+                  color: Colors.blueGrey,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                )),
           ],
         ),
       ),
